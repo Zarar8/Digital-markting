@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Marketing LMS</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0d1117;
+      color: white;
+      overflow: hidden;
+    }
+
+    /* ===== Money Falling Animation (Login Page Only) ===== */
+    .money {
+      position: absolute;
+      top: -50px;
+      font-size: 20px;
+      color: gold;
+      animation: fall linear forwards;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    /* ===== Centered Login Box ===== */
+    .login-container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 2;
+      position: relative;
+    }
+    .login-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      backdrop-filter: blur(6px);
+      box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.5);
+    }
+    .login-box input {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 200px;
+      border-radius: 8px;
+      border: none;
+    }
+    .login-box button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: gold;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* ===== Dashboard (After Login) ===== */
+    .dashboard {
+      display: none;
+      height: 100vh;
+      display: flex;
+    }
+    .sidebar {
+      width: 250px;
+      background: #161b22;
+      padding: 20px;
+    }
+    .sidebar h2 {
+      margin-bottom: 20px;
+      font-size: 18px;
+      border-bottom: 2px solid gold;
+      padding-bottom: 10px;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      padding: 12px;
+      margin: 8px 0;
+      background: #21262d;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .sidebar ul li:hover {
+      background: gold;
+      color: black;
+      font-weight: bold;
+    }
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+    .content iframe {
+      width: 100%;
+      height: 90%;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== LOGIN PAGE ===== -->
+  <div class="login-container" id="loginPage">
+    <div class="login-box">
+      <h2>Login to Digital Marketing Course</h2>
+      <input type="text" id="username" placeholder="Enter Username">
+      <input type="password" id="password" placeholder="Enter Password">
+      <button onclick="login()">Login</button>
+    </div>
+  </div>
+
+  <!-- ===== DASHBOARD PAGE ===== -->
+  <div class="dashboard" id="dashboard">
+    <div class="sidebar">
+      <h2>Course Modules</h2>
+      <ul>
+        <li onclick="playVideo('https://www.youtube.com/embed/VIDEO_ID1')">SEO Basics</li>
+        <li onclick="playVideo('https://www.youtube.com/embed/VIDEO_ID2')">Content Marketing</li>
+        <li onclick="playVideo('https://www.youtube.com/embed/VIDEO_ID3')">Social Media Strategy</li>
+        <li onclick="playVideo('https://www.youtube.com/embed/VIDEO_ID4')">Email Marketing</li>
+        <li onclick="playVideo('https://www.youtube.com/embed/VIDEO_ID5')">Google Ads</li>
+      </ul>
+    </div>
+    <div class="content">
+      <h2>Welcome to the Course</h2>
+      <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Money Rain (Only on Login Page)
+    function createMoney() {
+      const money = document.createElement('div');
+      money.classList.add('money');
+      money.textContent = "??";
+      money.style.left = Math.random() * window.innerWidth + "px";
+      money.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(money);
+      setTimeout(() => money.remove(), 5000);
+    }
+    let moneyInterval = setInterval(createMoney, 300);
+
+    // Login Function
+    function login() {
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("dashboard").style.display = "flex";
+      clearInterval(moneyInterval); // Stop money after login
+    }
+
+    // Play Selected Video
+    function playVideo(link) {
+      document.getElementById("videoPlayer").src = link;
+    }
+  </script>
+</body>
+</html>
